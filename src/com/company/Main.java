@@ -8,10 +8,12 @@ import java.util.*;
 
 public class Main {
 
-    char[][] field = new char [3][3];
     final char PLAYER_DOT = 'x';
     final char AI_DOT = 'o';
     final char EMPTY_DOT = '.';
+    final int FIELD_DIMENSIONS = 5;
+    char[][] field = new char [FIELD_DIMENSIONS][FIELD_DIMENSIONS];
+
     Scanner sc = new Scanner(System.in);
     Random rand = new Random();
 
