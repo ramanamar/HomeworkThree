@@ -98,15 +98,15 @@ public class Main {
 
     boolean checkWin(char dot) {
         //check horizontals
-//        if (field[0][0] == dot && field [0][1] == dot && field[0][2] == dot) {
-//            return true;
-//        }
-//        if (field[1][0] == dot && field [1][1] == dot && field[1][2] == dot) {
-//            return true;
-//        }
-//        if (field[2][0] == dot && field [2][1] == dot && field[2][2] == dot) {
-//            return true;
-//        }
+        if (field[0][0] == dot && field [0][1] == dot && field[0][2] == dot) {
+            return true;
+        }
+        if (field[1][0] == dot && field [1][1] == dot && field[1][2] == dot) {
+            return true;
+        }
+        if (field[2][0] == dot && field [2][1] == dot && field[2][2] == dot) {
+            return true;
+        }
         //alternate check horizontals
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field.length; j++){
