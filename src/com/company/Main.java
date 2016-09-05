@@ -12,6 +12,8 @@ public class Main {
     final char AI_DOT = 'o';
     final char EMPTY_DOT = '.';
     final int FIELD_DIMENSIONS = 5;
+    final int WIN_COUNT = 4;
+    int dotCounter = 0;
     char[][] field = new char [FIELD_DIMENSIONS][FIELD_DIMENSIONS];
 
     Scanner sc = new Scanner(System.in);
@@ -48,16 +50,16 @@ public class Main {
     }
 
     void initField() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
                 field[i][j] = EMPTY_DOT;
             }
         }
     }
 
     void printField() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
                 print(field[i][j]);
             }
             println(" ");
@@ -68,7 +70,7 @@ public class Main {
     void playerTurn() {
         int x, y;
         do {
-            System.out.println("Enter X and Y (1-3:");
+            System.out.println("Enter X and Y (1-5):");
             x = sc.nextInt();
             y = sc.nextInt();
         } while(!isCellEmpty(x - 1, y - 1));
@@ -78,14 +80,14 @@ public class Main {
     void aiTurn() {
         int x, y;
         do {
-            x = rand.nextInt(2);
-            y = rand.nextInt(2);
+            x = rand.nextInt(field.length);
+            y = rand.nextInt(field.length);
         } while(!isCellEmpty(x, y));
         field[x][y] = AI_DOT;
     }
 
     boolean isCellEmpty(int x, int y) {
-        if (x < 0 || y < 0 || x > 2 || y > 2) {
+        if (x < 0 || y < 0 || x > 5 || y > 5) {
             return false;
         }
         if (field[x][y] == EMPTY_DOT) {
@@ -96,14 +98,27 @@ public class Main {
 
     boolean checkWin(char dot) {
         //check horizontals
-        if (field[0][0] == dot && field [0][1] == dot && field[0][2] == dot) {
-            return true;
-        }
-        if (field[1][0] == dot && field [1][1] == dot && field[1][2] == dot) {
-            return true;
-        }
-        if (field[2][0] == dot && field [2][1] == dot && field[2][2] == dot) {
-            return true;
+//        if (field[0][0] == dot && field [0][1] == dot && field[0][2] == dot) {
+//            return true;
+//        }
+//        if (field[1][0] == dot && field [1][1] == dot && field[1][2] == dot) {
+//            return true;
+//        }
+//        if (field[2][0] == dot && field [2][1] == dot && field[2][2] == dot) {
+//            return true;
+//        }
+        //alternate check horizontals
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++){
+                if (field[i][j] == dot) {
+                    dotCounter++;
+                    } else {
+                        dotCounter = 0;
+                    }
+                    if (dotCounter == WIN_COUNT) {
+                        return true;
+                }
+            }
         }
         //check verticals
         if (field[0][0] == dot && field [1][0] == dot && field[2][0] == dot) {
